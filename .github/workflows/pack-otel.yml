@@ -32,9 +32,13 @@ jobs:
         run: |
           zip -j otel-v1.9.0-bundle.zip nupkg-files/*.nupkg
           
-      - name: Upload Result
-        uses: actions/upload-artifact@v4
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
         with:
-          name: otel-offline-bundle
-          path: otel-v1.9.0-bundle.zip
-          retention-days: 1
+          tag_name: v1.9.0-offline
+          name: OTEL v1.9.0 Offline Bundle
+          files: otel-v1.9.0-bundle.zip
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
